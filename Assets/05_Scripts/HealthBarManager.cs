@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class HealthBarManager : MonoBehaviour
 {
+    #region Initialization
+    // region help to organize
+
+    //Identifiers beginning with an underscore - [SerializeField] are global.
     [SerializeField] TMP_InputField TankAttackInputField;
     [SerializeField] TMP_InputField CrossbowAttackInputField;
     [SerializeField] TMP_InputField PoisonAttackInputField;
@@ -22,87 +27,81 @@ public class HealthBarManager : MonoBehaviour
     [SerializeField] ParticleSystem ShieldEffect;
     [SerializeField] ParticleSystem MedikitEffect;
 
-    float TankAttackAmount;
-    float CrossbowAttackAmount;
-    float PoisonAttackAmount;
-    float BombAttackAmount;
-    float ShieldAttackAmount;
-    float MedikitAttackAmount;
+    
+    //Identifiers beginning with an underscore
+    private float _tankAttackAmount;
+    private float _crossbowAttackAmount;
+    private float _poisonAttackAmount;
+    private float _bombAttackAmount;
+    private float _shieldAttackAmount;
+    private float _medikitAttackAmount;
+    
+    // Identifiers beginning with an underscore followed immediately by an uppercase letter
+    public float Test = 0.1f;
 
-    //Test-Button-Funktion des Panzers
+    // _ (underscore) = avoid collision of names
+
+    #endregion
+    
     
     public void TankTest()
     {
-        //string-to-float-Konvertierung
-        float.TryParse(TankAttackInputField.text, out TankAttackAmount);
+        float.TryParse(TankAttackInputField.text, out _tankAttackAmount);
 
-        if (TankAttackAmount > 0) //Input muss grˆﬂer 0 sein
-        {
-            //Schaden von Lebensanzeige abziehen
-            HealthBar.value -= TankAttackAmount;
-
-            //Particle Effect des Panzer wird abgespielt
-            PanzerEffect.Play();
-        }
+        // if not (_tankAttackAmount > 0 = true) do nothing.
+        if (!(_tankAttackAmount > 0)) return;
+        HealthBar.value -= _tankAttackAmount;
+        PanzerEffect.Play();
     }
-
-    //Test-Button-Funktion des Crossbows
+    
+    
     public void CrossbowTest()
     {
-        float.TryParse(CrossbowAttackInputField.text, out CrossbowAttackAmount);
-        if (CrossbowAttackAmount > 0)
-        {
-            HealthBar.value -= CrossbowAttackAmount;
-            CrossbowEffect.Play();
-        }
-            
+        float.TryParse(CrossbowAttackInputField.text, out _crossbowAttackAmount);
+        if (!(_crossbowAttackAmount > 0)) return;
+        HealthBar.value -= _crossbowAttackAmount;
+        CrossbowEffect.Play();
     }
 
+    
     public void PoisonTest()
     {
-
+        //TODO: Create PoisonTest function
     }
-
-    //Test-Button-Funktion der Bombe
+    
+    
     public void BombTest()
     {
-        float.TryParse(BombAttackInputField.text, out BombAttackAmount);
-        if (BombAttackAmount > 0)
-        {
-            HealthBar.value -= BombAttackAmount;
-            BombEffect.Play();
-        }
-            
+        float.TryParse(BombAttackInputField.text, out _bombAttackAmount);
+        if (!(_bombAttackAmount > 0)) return;
+        HealthBar.value -= _bombAttackAmount;
+        BombEffect.Play();
     }
 
+    
     public void ShieldTest()
     {
-
+        //TODO: Create ShieldTest function
     }
-
-    //Test-Button-Funktion des Medikits
+    
+    
     public void MedikitTest()
     {
-        float.TryParse(MedikitAttackInputField.text, out MedikitAttackAmount);
+        float.TryParse(MedikitAttackInputField.text, out _medikitAttackAmount);
 
-        if (MedikitAttackAmount > 0)
-        {
-            //Heilung zu Lebensanzeige addieren
-            HealthBar.value += MedikitAttackAmount;
-
-            MedikitEffect.Play();
-        }
-        
+        if (!(_medikitAttackAmount > 0)) return;
+        HealthBar.value += _medikitAttackAmount;
+        MedikitEffect.Play();
     }
-
-    //Programm schlieﬂen
+    
+    
     public void QuitOnClick()
     {
         Debug.Log("ButtonClick - Quit");
-        Application.Quit();
-
-        //Playmode im Editor stoppen
-        UnityEditor.EditorApplication.isPlaying = false; 
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false; 
+        #else
+            Application.Quit();
+        #endif
     }
-
 }
