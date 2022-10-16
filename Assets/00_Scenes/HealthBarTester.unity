@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -932,11 +932,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123784643}
   m_CullTransparentMesh: 1
---- !u!198 &165341675 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7794909729923627181, guid: 389c49ce28bf7f74b90f8c4ce3c22e9f, type: 3}
-  m_PrefabInstance: {fileID: 1087793687}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &176319352
 GameObject:
   m_ObjectHideFlags: 0
@@ -1463,11 +1458,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 248252821}
   m_CullTransparentMesh: 1
---- !u!198 &263377783 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 725748389856807712, guid: c52dab6343fcde542b27803814941844, type: 3}
-  m_PrefabInstance: {fileID: 629811768}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &273623121
 GameObject:
   m_ObjectHideFlags: 0
@@ -3131,19 +3121,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b82bd5f04e5513458114eb0550b31db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TankAttackInputField: {fileID: 1357540339}
-  CrossbowAttackInputField: {fileID: 1295270710}
-  PoisonAttackInputField: {fileID: 1908424941}
-  BombAttackInputField: {fileID: 802823585}
-  ShielAttackInputField: {fileID: 1947467159}
-  MedikitAttackInputField: {fileID: 1280837042}
-  HealthBar: {fileID: 1980335904}
-  PanzerEffect: {fileID: 263377783}
-  CrossbowEffect: {fileID: 165341675}
-  PoisonEffect: {fileID: 1203815607}
-  BombEffect: {fileID: 1708552177}
-  ShieldEffect: {fileID: 0}
-  MedikitEffect: {fileID: 1128400238}
+  tankAttackInputField: {fileID: 0}
+  crossbowAttackInputField: {fileID: 0}
+  poisonAttackInputField: {fileID: 0}
+  bombAttackInputField: {fileID: 0}
+  shielAttackInputField: {fileID: 0}
+  medikitAttackInputField: {fileID: 0}
+  healthBar: {fileID: 0}
+  panzerEffect: {fileID: 0}
+  crossbowEffect: {fileID: 0}
+  poisonEffect: {fileID: 0}
+  bombEffect: {fileID: 0}
+  shieldEffect: {fileID: 0}
+  medikitEffect: {fileID: 0}
+  Test: 0.1
 --- !u!1 &764074513
 GameObject:
   m_ObjectHideFlags: 0
@@ -5031,11 +5022,6 @@ RectTransform:
   m_AnchoredPosition: {x: 587.58105, y: 15}
   m_SizeDelta: {x: 88.16998, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!198 &1128400238 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 19800004, guid: 9d8f83ef027fcde4db70223203cab4c2, type: 3}
-  m_PrefabInstance: {fileID: 1901054718}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1190471583
 GameObject:
   m_ObjectHideFlags: 0
@@ -5380,11 +5366,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1203383255}
   m_CullTransparentMesh: 1
---- !u!198 &1203815607 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 4397334591890123668, guid: f6a3a0dd5be280e4fb0376b76a0bae85, type: 3}
-  m_PrefabInstance: {fileID: 927558548}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1229654580
 GameObject:
   m_ObjectHideFlags: 0
@@ -6747,6 +6728,117 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1342100184}
   m_CullTransparentMesh: 1
+--- !u!1 &1349026337
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1349026342}
+  - component: {fileID: 1349026341}
+  - component: {fileID: 1349026340}
+  - component: {fileID: 1349026339}
+  - component: {fileID: 1349026338}
+  m_Layer: 0
+  m_Name: TestCube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1349026338
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349026337}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1349026339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349026337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0be389a28f74e47bdcd5f5fbc615de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  accelerometerY: 0
+--- !u!23 &1349026340
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349026337}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1349026341
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349026337}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1349026342
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349026337}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1357540337
 GameObject:
   m_ObjectHideFlags: 0
@@ -7011,8 +7103,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.29003906, y: -0.2999878}
-  m_SizeDelta: {x: 4.94013, y: 6.599989}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1438132281
 MonoBehaviour:
@@ -7325,11 +7417,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding: {x: -8, y: -5, z: -8, w: -5}
   m_Softness: {x: 0, y: 0}
---- !u!198 &1708552177 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2504214343621411456, guid: dd3d8ed435b807744974500121c7e09b, type: 3}
-  m_PrefabInstance: {fileID: 208884057}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1736588144
 GameObject:
   m_ObjectHideFlags: 0
