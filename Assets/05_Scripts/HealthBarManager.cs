@@ -22,7 +22,12 @@ namespace _05_Scripts
         [SerializeField] private ParticleSystem medikitEffect;
 
         [SerializeField] private GameObject[] charSkin;
-    
+
+        [SerializeField] AudioSource bombSound;
+        [SerializeField] AudioSource tankSound;
+        [SerializeField] AudioSource crossbowSound;
+        [SerializeField] AudioSource medikitSound;
+
         //Identifiers beginning with an underscore
         private float _tankAttackAmount;
         private float _crossbowAttackAmount;
@@ -35,9 +40,9 @@ namespace _05_Scripts
         // _ (underscore) = avoid collision of names
         
 
-        #endregion
-        
-        
+        #endregion      
+
+
         public void RerollChar()
         {
             do
@@ -56,28 +61,31 @@ namespace _05_Scripts
         {
             float.TryParse(tankAttackInputField.text, out _tankAttackAmount);
 
-            // if not (_tankAttackAmount > 0 = true) do nothing.
-            if (_tankAttackAmount <= 0 || healthBar.value == healthBar.minValue) return;
+            // if _tankAttackAmount > healthBar.minValue = true or healthBar.value == healthBar.minValue do nothing.
+            if (_tankAttackAmount <= healthBar.minValue || healthBar.value == healthBar.minValue) return;
             healthBar.value -= _tankAttackAmount;
             panzerEffect.Play();
+            tankSound.Play();
         }
     
     
         public void CrossbowTest()
         {
             float.TryParse(crossbowAttackInputField.text, out _crossbowAttackAmount);
-            if (_crossbowAttackAmount <= 0 || healthBar.value == healthBar.minValue) return;
+            if (_crossbowAttackAmount <= healthBar.minValue || healthBar.value == healthBar.minValue) return;
             healthBar.value -= _crossbowAttackAmount;
             crossbowEffect.Play();
+            crossbowSound.Play();
         } 
     
 
         public void BombTest()
         {
             float.TryParse(bombAttackInputField.text, out _bombAttackAmount);
-            if (!(_bombAttackAmount > 0) || healthBar.value == healthBar.minValue) return;
+            if (!(_bombAttackAmount > healthBar.minValue) || healthBar.value == healthBar.minValue) return;
             healthBar.value -= _bombAttackAmount;
             bombEffect.Play();
+            bombSound.Play();
         }
     
 
@@ -85,9 +93,10 @@ namespace _05_Scripts
         {
             float.TryParse(medikitAttackInputField.text, out _medikitAttackAmount);
 
-            if (!(_medikitAttackAmount > 0) || healthBar.value == healthBar.maxValue) return;
+            if (!(_medikitAttackAmount > healthBar.minValue) || healthBar.value == healthBar.maxValue) return;
             healthBar.value += _medikitAttackAmount;
             medikitEffect.Play();
+            medikitSound.Play();
         } 
     
 
