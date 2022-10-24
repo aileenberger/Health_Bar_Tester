@@ -14,6 +14,10 @@ namespace _05_Scripts
         [SerializeField] private TMP_InputField bombAttackInputField;
         [SerializeField] private TMP_InputField medikitAttackInputField;
 
+        [SerializeField] private TMP_InputField maxHealthBarValueInputField;
+
+        [SerializeField] private TMP_Text maxHealthBarValueDisplay;
+
         [SerializeField] private Slider healthBar;
 
         [SerializeField] private ParticleSystem panzerEffect;
@@ -33,14 +37,24 @@ namespace _05_Scripts
         private float _crossbowAttackAmount;
         private float _bombAttackAmount;
         private float _medikitAttackAmount;
+
+        private float _maxHealthBarValue;
     
         private int _randomCharNumber, _activeIndex;
 
         // Identifiers beginning with an underscore followed immediately by an uppercase letter
         // _ (underscore) = avoid collision of names
-        
 
-        #endregion      
+
+        #endregion
+
+
+        private void Start()
+        {
+            maxHealthBarValueInputField.text = healthBar.maxValue.ToString();           
+            healthBar.value = healthBar.maxValue;
+            maxHealthBarValueDisplay.text = healthBar.value.ToString();
+        }
 
 
         public void RerollChar()
@@ -54,6 +68,21 @@ namespace _05_Scripts
             charSkin[_randomCharNumber].SetActive(true);
 
             _activeIndex = _randomCharNumber;
+        }
+
+
+        public void UpdateMaxHealthBarValue()
+        {
+            float.TryParse(maxHealthBarValueInputField.text, out _maxHealthBarValue);
+            if (_maxHealthBarValue < healthBar.minValue) return;
+            healthBar.value = (healthBar.value/healthBar.maxValue)*_maxHealthBarValue;
+            healthBar.maxValue = _maxHealthBarValue;
+        }
+
+
+        public void UpdateHealthValueDisplay()
+        {
+            maxHealthBarValueDisplay.text = healthBar.value.ToString();
         }
 
 
@@ -92,7 +121,6 @@ namespace _05_Scripts
         public void MedikitTest()
         {
             float.TryParse(medikitAttackInputField.text, out _medikitAttackAmount);
-
             if (!(_medikitAttackAmount > healthBar.minValue) || healthBar.value == healthBar.maxValue) return;
             healthBar.value += _medikitAttackAmount;
             medikitEffect.Play();
