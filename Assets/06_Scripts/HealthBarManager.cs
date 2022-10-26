@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _05_Scripts
+namespace _06_Scripts
 {
     public class HealthBarManager : MonoBehaviour
     {
@@ -74,7 +74,7 @@ namespace _05_Scripts
         public void UpdateMaxHealthBarValue()
         {
             float.TryParse(maxHealthBarValueInputField.text, out _maxHealthBarValue);
-            if (_maxHealthBarValue < healthBar.minValue) return;
+            if (_maxHealthBarValue <= healthBar.minValue) return;
             healthBar.value = (healthBar.value/healthBar.maxValue)*_maxHealthBarValue;
             healthBar.maxValue = _maxHealthBarValue;
         }
@@ -86,11 +86,17 @@ namespace _05_Scripts
         }
 
 
+        public void ResetHealthBar()
+        {
+            healthBar.value = healthBar.maxValue;
+        }
+
+
         public void TankTest()
         {
             float.TryParse(tankAttackInputField.text, out _tankAttackAmount);
 
-            // if _tankAttackAmount > healthBar.minValue = true or healthBar.value == healthBar.minValue do nothing.
+            // if _tankAttackAmount <= healthBar.minValue = true or healthBar.value == healthBar.minValue do nothing.
             if (_tankAttackAmount <= healthBar.minValue || healthBar.value == healthBar.minValue) return;
             healthBar.value -= _tankAttackAmount;
             panzerEffect.Play();

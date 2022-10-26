@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace _05_Scripts
+namespace _06_Scripts
 {
     public class RotateObj : MonoBehaviour
     {

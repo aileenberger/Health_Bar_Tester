@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace _05_Scripts
+namespace _06_Scripts
 {
     public class CreateFolders : EditorWindow
     {
