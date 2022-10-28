@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 namespace _06_Scripts
 {
@@ -17,6 +18,7 @@ namespace _06_Scripts
         [SerializeField] private TMP_InputField maxHealthBarValueInputField;
 
         [SerializeField] private TMP_Text maxHealthBarValueDisplay;
+        [SerializeField] private TMP_Text HelpDisplay;
 
         [SerializeField] private Slider healthBar;
 
@@ -75,9 +77,12 @@ namespace _06_Scripts
         public void UpdateMaxHealthBarValue()
         {
             float.TryParse(maxHealthBarValueInputField.text, out _maxHealthBarValue);
-            if (_maxHealthBarValue <= healthBar.minValue && _maxEingabe <= _maxHealthBarValue) 
+            if (_maxHealthBarValue <= healthBar.minValue || _maxEingabe <= _maxHealthBarValue) 
             { 
-                Debug.Log("Maximales Leben muss zwische" + healthBar.minValue + "und" + _maxEingabe + "liegen."); return; 
+                Debug.Log("Maximales Leben muss zwischen " + healthBar.minValue + " und " + _maxEingabe + " liegen.");
+                HelpDisplay.text = "Maximales Leben muss zwischen " + healthBar.minValue + " und " + _maxEingabe + " liegen.";
+                StartCoroutine(DelayResetHelpDisplay());
+                return; 
             }
             float temp = (healthBar.value/healthBar.maxValue)*_maxHealthBarValue;
             healthBar.maxValue = _maxHealthBarValue;
@@ -102,7 +107,13 @@ namespace _06_Scripts
             float.TryParse(tankAttackInputField.text, out _tankAttackAmount);
 
             // if _tankAttackAmount <= healthBar.minValue = true or healthBar.value == healthBar.minValue do nothing.
-            if (_tankAttackAmount <= healthBar.minValue || healthBar.value == healthBar.minValue) return;
+            if (_tankAttackAmount <= healthBar.minValue || _tankAttackAmount >= healthBar.maxValue || healthBar.value == healthBar.minValue)
+            {
+                Debug.Log("Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.");
+                HelpDisplay.text = "Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.";
+                StartCoroutine(DelayResetHelpDisplay());
+                return;
+            }
             healthBar.value -= _tankAttackAmount;
             panzerEffect.Play();
             tankSound.Play();
@@ -112,7 +123,13 @@ namespace _06_Scripts
         public void CrossbowTest()
         {
             float.TryParse(crossbowAttackInputField.text, out _crossbowAttackAmount);
-            if (_crossbowAttackAmount <= healthBar.minValue || healthBar.value == healthBar.minValue) return;
+            if ((_crossbowAttackAmount <= healthBar.minValue || _crossbowAttackAmount >= healthBar.maxValue) || healthBar.value == healthBar.minValue)
+            {
+                Debug.Log("Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.");
+                HelpDisplay.text = "Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.";
+                StartCoroutine(DelayResetHelpDisplay());
+                return;
+            }
             healthBar.value -= _crossbowAttackAmount;
             crossbowEffect.Play();
             crossbowSound.Play();
@@ -122,7 +139,13 @@ namespace _06_Scripts
         public void BombTest()
         {
             float.TryParse(bombAttackInputField.text, out _bombAttackAmount);
-            if (!(_bombAttackAmount > healthBar.minValue) || healthBar.value == healthBar.minValue) return;
+            if ((_bombAttackAmount <= healthBar.minValue || _bombAttackAmount >= healthBar.maxValue) || healthBar.value == healthBar.minValue)
+            {
+                Debug.Log("Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.");
+                HelpDisplay.text = "Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.";
+                StartCoroutine(DelayResetHelpDisplay());
+                return;
+            }
             healthBar.value -= _bombAttackAmount;
             bombEffect.Play();
             bombSound.Play();
@@ -132,10 +155,23 @@ namespace _06_Scripts
         public void MedikitTest()
         {
             float.TryParse(medikitAttackInputField.text, out _medikitAttackAmount);
-            if (!(_medikitAttackAmount > healthBar.minValue) || healthBar.value == healthBar.maxValue) return;
+            if ((_medikitAttackAmount <= healthBar.minValue || _medikitAttackAmount >= healthBar.maxValue) || healthBar.value == healthBar.maxValue)
+            {
+                Debug.Log("Heilung muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.");
+                HelpDisplay.text = "Heilung muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.";
+                StartCoroutine(DelayResetHelpDisplay());
+                return;
+            }
             healthBar.value += _medikitAttackAmount;
             medikitEffect.Play();
             medikitSound.Play();
+        }
+
+
+        IEnumerator DelayResetHelpDisplay()
+        {
+            yield return new WaitForSeconds(5);
+            HelpDisplay.text = "";
         }
 
 
