@@ -39,7 +39,8 @@ namespace _06_Scripts
         private float _medikitAttackAmount;
 
         private float _maxHealthBarValue;
-    
+        [SerializeField] private float _maxEingabe = 1000;
+
         private int _randomCharNumber, _activeIndex;
 
         // Identifiers beginning with an underscore followed immediately by an uppercase letter
@@ -74,9 +75,13 @@ namespace _06_Scripts
         public void UpdateMaxHealthBarValue()
         {
             float.TryParse(maxHealthBarValueInputField.text, out _maxHealthBarValue);
-            if (_maxHealthBarValue <= healthBar.minValue) return;
-            healthBar.value = (healthBar.value/healthBar.maxValue)*_maxHealthBarValue;
+            if (_maxHealthBarValue <= healthBar.minValue && _maxEingabe <= _maxHealthBarValue) 
+            { 
+                Debug.Log("Maximales Leben muss zwische" + healthBar.minValue + "und" + _maxEingabe + "liegen."); return; 
+            }
+            float temp = (healthBar.value/healthBar.maxValue)*_maxHealthBarValue;
             healthBar.maxValue = _maxHealthBarValue;
+            healthBar.value = temp;
         }
 
 
@@ -131,14 +136,14 @@ namespace _06_Scripts
             healthBar.value += _medikitAttackAmount;
             medikitEffect.Play();
             medikitSound.Play();
-        } 
-    
+        }
+
 
         public void QuitOnClick()
         {
             Debug.Log("ButtonClick - Quit");
 #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false; 
+            UnityEditor.EditorApplication.isPlaying = false;
 #else
             Application.Quit();
 #endif
