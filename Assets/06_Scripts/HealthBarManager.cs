@@ -105,8 +105,6 @@ namespace _06_Scripts
         public void TankTest()
         {
             float.TryParse(tankAttackInputField.text, out _tankAttackAmount);
-
-            // if _tankAttackAmount <= healthBar.minValue = true or healthBar.value == healthBar.minValue do nothing.
             if (_tankAttackAmount <= healthBar.minValue || _tankAttackAmount >= healthBar.maxValue || healthBar.value == healthBar.minValue)
             {
                 Debug.Log("Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.");
@@ -123,7 +121,7 @@ namespace _06_Scripts
         public void CrossbowTest()
         {
             float.TryParse(crossbowAttackInputField.text, out _crossbowAttackAmount);
-            if ((_crossbowAttackAmount <= healthBar.minValue || _crossbowAttackAmount >= healthBar.maxValue) || healthBar.value == healthBar.minValue)
+            if (_crossbowAttackAmount <= healthBar.minValue || _crossbowAttackAmount >= healthBar.maxValue || healthBar.value == healthBar.minValue)
             {
                 Debug.Log("Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.");
                 HelpDisplay.text = "Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.";
@@ -139,7 +137,7 @@ namespace _06_Scripts
         public void BombTest()
         {
             float.TryParse(bombAttackInputField.text, out _bombAttackAmount);
-            if ((_bombAttackAmount <= healthBar.minValue || _bombAttackAmount >= healthBar.maxValue) || healthBar.value == healthBar.minValue)
+            if (_bombAttackAmount <= healthBar.minValue || _bombAttackAmount >= healthBar.maxValue || healthBar.value == healthBar.minValue)
             {
                 Debug.Log("Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.");
                 HelpDisplay.text = "Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.";
@@ -155,7 +153,7 @@ namespace _06_Scripts
         public void MedikitTest()
         {
             float.TryParse(medikitAttackInputField.text, out _medikitAttackAmount);
-            if ((_medikitAttackAmount <= healthBar.minValue || _medikitAttackAmount >= healthBar.maxValue) || healthBar.value == healthBar.maxValue)
+            if (_medikitAttackAmount <= healthBar.minValue || _medikitAttackAmount >= healthBar.maxValue || healthBar.value == healthBar.maxValue)
             {
                 Debug.Log("Heilung muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.");
                 HelpDisplay.text = "Heilung muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.";
