@@ -81,6 +81,7 @@ namespace _06_Scripts
             { 
                 Debug.Log("Maximales Leben muss zwischen " + healthBar.minValue + " und " + _maxEingabe + " liegen.");
                 HelpDisplay.text = "Maximales Leben muss zwischen " + healthBar.minValue + " und " + _maxEingabe + " liegen.";
+                StopCoroutine(DelayResetHelpDisplay());
                 StartCoroutine(DelayResetHelpDisplay());
                 return; 
             }
@@ -109,6 +110,7 @@ namespace _06_Scripts
             {
                 Debug.Log("Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.");
                 HelpDisplay.text = "Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.";
+                StopCoroutine(DelayResetHelpDisplay());
                 StartCoroutine(DelayResetHelpDisplay());
                 return;
             }
@@ -125,6 +127,7 @@ namespace _06_Scripts
             {
                 Debug.Log("Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.");
                 HelpDisplay.text = "Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.";
+                StopCoroutine(DelayResetHelpDisplay());
                 StartCoroutine(DelayResetHelpDisplay());
                 return;
             }
@@ -141,6 +144,7 @@ namespace _06_Scripts
             {
                 Debug.Log("Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.");
                 HelpDisplay.text = "Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.";
+                StopCoroutine(DelayResetHelpDisplay());
                 StartCoroutine(DelayResetHelpDisplay());
                 return;
             }
@@ -157,7 +161,8 @@ namespace _06_Scripts
             {
                 Debug.Log("Heilung muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.");
                 HelpDisplay.text = "Heilung muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.";
-                StartCoroutine(DelayResetHelpDisplay());
+                StopCoroutine(DelayResetHelpDisplay());
+                StartCoroutine(DelayResetHelpDisplay());            
                 return;
             }
             healthBar.value += _medikitAttackAmount;
@@ -168,8 +173,8 @@ namespace _06_Scripts
 
         IEnumerator DelayResetHelpDisplay()
         {
-            yield return new WaitForSeconds(5);
-            HelpDisplay.text = "";
+                yield return new WaitForSeconds(4f);
+                HelpDisplay.text = "";
         }
 
 
