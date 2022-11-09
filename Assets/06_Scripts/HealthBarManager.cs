@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace _06_Scripts
 {
@@ -81,8 +82,8 @@ namespace _06_Scripts
             { 
                 Debug.Log("Maximales Leben muss zwischen " + healthBar.minValue + " und " + _maxEingabe + " liegen.");
                 HelpDisplay.text = "Maximales Leben muss zwischen " + healthBar.minValue + " und " + _maxEingabe + " liegen.";
-                StopCoroutine(DelayResetHelpDisplay());
-                StartCoroutine(DelayResetHelpDisplay());
+                CancelInvoke("ClearHelpDisplay");
+                Invoke("ClearHelpDisplay", 2);
                 return; 
             }
             float temp = (healthBar.value/healthBar.maxValue)*_maxHealthBarValue;
@@ -110,8 +111,8 @@ namespace _06_Scripts
             {
                 Debug.Log("Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.");
                 HelpDisplay.text = "Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.";
-                StopCoroutine(DelayResetHelpDisplay());
-                StartCoroutine(DelayResetHelpDisplay());
+                CancelInvoke("ClearHelpDisplay");
+                Invoke("ClearHelpDisplay", 2);
                 return;
             }
             healthBar.value -= _tankAttackAmount;
@@ -127,8 +128,8 @@ namespace _06_Scripts
             {
                 Debug.Log("Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.");
                 HelpDisplay.text = "Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.";
-                StopCoroutine(DelayResetHelpDisplay());
-                StartCoroutine(DelayResetHelpDisplay());
+                CancelInvoke("ClearHelpDisplay");
+                Invoke("ClearHelpDisplay", 2);
                 return;
             }
             healthBar.value -= _crossbowAttackAmount;
@@ -144,8 +145,8 @@ namespace _06_Scripts
             {
                 Debug.Log("Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.");
                 HelpDisplay.text = "Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.";
-                StopCoroutine(DelayResetHelpDisplay());
-                StartCoroutine(DelayResetHelpDisplay());
+                CancelInvoke("ClearHelpDisplay");
+                Invoke("ClearHelpDisplay", 2);
                 return;
             }
             healthBar.value -= _bombAttackAmount;
@@ -161,8 +162,8 @@ namespace _06_Scripts
             {
                 Debug.Log("Heilung muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.");
                 HelpDisplay.text = "Heilung muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.";
-                StopCoroutine(DelayResetHelpDisplay());
-                StartCoroutine(DelayResetHelpDisplay());            
+                CancelInvoke("ClearHelpDisplay");
+                Invoke("ClearHelpDisplay", 2);
                 return;
             }
             healthBar.value += _medikitAttackAmount;
@@ -171,10 +172,10 @@ namespace _06_Scripts
         }
 
 
-        IEnumerator DelayResetHelpDisplay()
+        void ClearHelpDisplay()
         {
-                yield return new WaitForSeconds(4f);
-                HelpDisplay.text = "";
+            HelpDisplay.text = "";
+            Debug.Log("HelpDisplay cleared.");
         }
 
 
