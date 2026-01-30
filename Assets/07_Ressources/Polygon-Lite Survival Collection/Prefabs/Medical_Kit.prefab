@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2721066716118003460}
   - component: {fileID: 155335202167249870}
   - component: {fileID: 6934904754061034707}
-  - component: {fileID: 984640623171906409}
   m_Layer: 0
   m_Name: Medical_Kit
   m_TagString: Untagged
@@ -104,23 +103,3 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 5304385175697405907, guid: c6468f1b90f616a449318c252b93051f, type: 3}
---- !u!114 &984640623171906409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812453638202030619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: 100
-  m_MinHeight: 100
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
