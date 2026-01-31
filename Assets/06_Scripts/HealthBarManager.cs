@@ -1,8 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace _06_Scripts
 {
@@ -80,8 +78,8 @@ namespace _06_Scripts
             float.TryParse(maxHealthBarValueInputField.text, out _maxHealthBarValue);
             if (_maxHealthBarValue <= healthBar.minValue || _maxEingabe <= _maxHealthBarValue) 
             { 
-                Debug.Log("Maximales Leben muss zwischen " + healthBar.minValue + " und " + _maxEingabe + " liegen.");
-                HelpDisplay.text = "Maximales Leben muss zwischen " + healthBar.minValue + " und " + _maxEingabe + " liegen.";
+                Debug.Log("The maximum life points must be between " + healthBar.minValue + " and " + _maxEingabe + ".");
+                HelpDisplay.text = "The maximum life points must be between " + healthBar.minValue + " and " + _maxEingabe + ".";
                 CancelInvoke("ClearHelpDisplay");
                 Invoke("ClearHelpDisplay", 2);
                 return; 
@@ -106,15 +104,23 @@ namespace _06_Scripts
 
         public void TankTest()
         {
-            float.TryParse(tankAttackInputField.text, out _tankAttackAmount);
-            if (_tankAttackAmount <= healthBar.minValue || _tankAttackAmount >= healthBar.maxValue || healthBar.value == healthBar.minValue)
+            if (healthBar.value == healthBar.minValue)
             {
-                Debug.Log("Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.");
-                HelpDisplay.text = "Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.";
+                CharAlreadyDead();
+                return;
+            }
+            
+            float.TryParse(tankAttackInputField.text, out _tankAttackAmount);
+            
+            if (_tankAttackAmount <= healthBar.minValue || _tankAttackAmount >= healthBar.maxValue)
+            {
+                Debug.Log("The damage must be between " + healthBar.minValue + " and " + healthBar.maxValue + ".");
+                HelpDisplay.text = "The damage must be between " + healthBar.minValue + " and " + healthBar.maxValue + ".";
                 CancelInvoke("ClearHelpDisplay");
                 Invoke("ClearHelpDisplay", 2);
                 return;
             }
+            
             healthBar.value -= _tankAttackAmount;
             panzerEffect.Play();
             tankSound.Play();
@@ -123,15 +129,23 @@ namespace _06_Scripts
     
         public void CrossbowTest()
         {
-            float.TryParse(crossbowAttackInputField.text, out _crossbowAttackAmount);
-            if (_crossbowAttackAmount <= healthBar.minValue || _crossbowAttackAmount >= healthBar.maxValue || healthBar.value == healthBar.minValue)
+            if (healthBar.value == healthBar.minValue)
             {
-                Debug.Log("Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.");
-                HelpDisplay.text = "Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.";
+                CharAlreadyDead();
+                return;
+            }
+            
+            float.TryParse(crossbowAttackInputField.text, out _crossbowAttackAmount);
+            
+            if (_crossbowAttackAmount <= healthBar.minValue || _crossbowAttackAmount >= healthBar.maxValue)
+            {
+                Debug.Log("The damage must be between " + healthBar.minValue + " and " + healthBar.maxValue + ".");
+                HelpDisplay.text = "The damage must be between " + healthBar.minValue + " and " + healthBar.maxValue + ".";
                 CancelInvoke("ClearHelpDisplay");
                 Invoke("ClearHelpDisplay", 2);
                 return;
             }
+            
             healthBar.value -= _crossbowAttackAmount;
             crossbowEffect.Play();
             crossbowSound.Play();
@@ -140,15 +154,23 @@ namespace _06_Scripts
 
         public void BombTest()
         {
-            float.TryParse(bombAttackInputField.text, out _bombAttackAmount);
-            if (_bombAttackAmount <= healthBar.minValue || _bombAttackAmount >= healthBar.maxValue || healthBar.value == healthBar.minValue)
+            if (healthBar.value == healthBar.minValue)
             {
-                Debug.Log("Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.");
-                HelpDisplay.text = "Schaden muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.";
+                CharAlreadyDead();
+                return;
+            }
+            
+            float.TryParse(bombAttackInputField.text, out _bombAttackAmount);
+            
+            if (_bombAttackAmount <= healthBar.minValue || _bombAttackAmount >= healthBar.maxValue)
+            {
+                Debug.Log("The damage must be between " + healthBar.minValue + " and " + healthBar.maxValue + ".");
+                HelpDisplay.text = "The damage must be between " + healthBar.minValue + " and " + healthBar.maxValue + ".";
                 CancelInvoke("ClearHelpDisplay");
                 Invoke("ClearHelpDisplay", 2);
                 return;
             }
+            
             healthBar.value -= _bombAttackAmount;
             bombEffect.Play();
             bombSound.Play();
@@ -157,20 +179,38 @@ namespace _06_Scripts
 
         public void MedikitTest()
         {
-            float.TryParse(medikitAttackInputField.text, out _medikitAttackAmount);
-            if (_medikitAttackAmount <= healthBar.minValue || _medikitAttackAmount >= healthBar.maxValue || healthBar.value == healthBar.maxValue)
+            if (healthBar.value == healthBar.maxValue)
             {
-                Debug.Log("Heilung muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.");
-                HelpDisplay.text = "Heilung muss zwischen " + healthBar.minValue + " und " + healthBar.maxValue + " liegen.";
+                Debug.Log("The character is fully healed. Deal damage first.");
+                HelpDisplay.text = "The character is fully healed. Deal damage first.";
                 CancelInvoke("ClearHelpDisplay");
                 Invoke("ClearHelpDisplay", 2);
                 return;
             }
+            
+            float.TryParse(medikitAttackInputField.text, out _medikitAttackAmount);
+            
+            if (_medikitAttackAmount <= healthBar.minValue || _medikitAttackAmount >= healthBar.maxValue)
+            {
+                Debug.Log("The healing must be between " + healthBar.minValue + " and " + healthBar.maxValue + ".");
+                HelpDisplay.text = "The healing must be between " + healthBar.minValue + " and " + healthBar.maxValue + ".";
+                CancelInvoke("ClearHelpDisplay");
+                Invoke("ClearHelpDisplay", 2);
+                return;
+            }
+            
             healthBar.value += _medikitAttackAmount;
             medikitEffect.Play();
             medikitSound.Play();
         }
 
+        private void CharAlreadyDead()
+        {
+            Debug.Log("The character is already dead. Reset the life points first.");
+            HelpDisplay.text = "The character is already dead. Reset the life points first.";
+            CancelInvoke("ClearHelpDisplay");
+            Invoke("ClearHelpDisplay", 2);
+        }
 
         void ClearHelpDisplay()
         {
