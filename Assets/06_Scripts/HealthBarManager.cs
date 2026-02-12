@@ -1,6 +1,8 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 namespace _06_Scripts
 {
@@ -204,6 +206,7 @@ namespace _06_Scripts
             medikitSound.Play();
         }
 
+        
         private void CharAlreadyDead()
         {
             Debug.Log("The character is already dead. Reset the life points first.");
@@ -212,13 +215,20 @@ namespace _06_Scripts
             Invoke("ClearHelpDisplay", 2);
         }
 
+        
         void ClearHelpDisplay()
         {
             HelpDisplay.text = "";
             Debug.Log("HelpDisplay cleared.");
         }
 
+        
+        public void LoadCredits()
+        {
+            SceneManager.LoadScene("Credits");
+        }
 
+        
         public void QuitOnClick()
         {
             Debug.Log("ButtonClick - Quit");
