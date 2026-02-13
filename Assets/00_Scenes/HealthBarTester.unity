@@ -3111,7 +3111,7 @@ MonoBehaviour:
   medikitAttackInputField: {fileID: 1280837042}
   maxHealthBarValueInputField: {fileID: 1214961959}
   maxHealthBarValueDisplay: {fileID: 15099219}
-  HelpDisplay: {fileID: 1916538537}
+  helpDisplay: {fileID: 1916538537}
   healthBar: {fileID: 1980335904}
   panzerEffect: {fileID: 1382405094}
   crossbowEffect: {fileID: 1850358696}
@@ -3125,7 +3125,7 @@ MonoBehaviour:
   tankSound: {fileID: 2041509420}
   crossbowSound: {fileID: 1793832265}
   medikitSound: {fileID: 989978416}
-  _maxEingabe: 1000
+  maxInput: 1000
 --- !u!1 &764074513
 GameObject:
   m_ObjectHideFlags: 0

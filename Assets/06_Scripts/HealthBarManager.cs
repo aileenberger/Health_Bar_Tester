@@ -18,7 +18,7 @@ namespace _06_Scripts
         [SerializeField] private TMP_InputField maxHealthBarValueInputField;
 
         [SerializeField] private TMP_Text maxHealthBarValueDisplay;
-        [SerializeField] private TMP_Text HelpDisplay;
+        [SerializeField] private TMP_Text helpDisplay;
 
         [SerializeField] private Slider healthBar;
 
@@ -29,20 +29,20 @@ namespace _06_Scripts
 
         [SerializeField] private GameObject[] charSkin;
 
-        [SerializeField] AudioSource bombSound;
-        [SerializeField] AudioSource tankSound;
-        [SerializeField] AudioSource crossbowSound;
-        [SerializeField] AudioSource medikitSound;
+        [SerializeField] private AudioSource bombSound;
+        [SerializeField] private AudioSource tankSound;
+        [SerializeField] private AudioSource crossbowSound;
+        [SerializeField] private AudioSource medikitSound;
+
+        [SerializeField] private float maxInput = 1000;        
 
         //Identifiers beginning with an underscore
         private float _tankAttackAmount;
         private float _crossbowAttackAmount;
         private float _bombAttackAmount;
         private float _medikitAttackAmount;
-
         private float _maxHealthBarValue;
-        [SerializeField] private float _maxEingabe = 1000;
-
+        
         private int _randomCharNumber, _activeIndex;
 
         // Identifiers beginning with an underscore followed immediately by an uppercase letter
@@ -54,9 +54,9 @@ namespace _06_Scripts
 
         private void Start()
         {
-            maxHealthBarValueInputField.text = healthBar.maxValue.ToString();           
+            maxHealthBarValueInputField.text = $"{healthBar.maxValue}";           
             healthBar.value = healthBar.maxValue;
-            maxHealthBarValueDisplay.text = healthBar.value.ToString();
+            maxHealthBarValueDisplay.text = $"{healthBar.value}";
         }
 
 
@@ -77,14 +77,16 @@ namespace _06_Scripts
         public void UpdateMaxHealthBarValue()
         {
             float.TryParse(maxHealthBarValueInputField.text, out _maxHealthBarValue);
-            if (_maxHealthBarValue <= healthBar.minValue || _maxEingabe <= _maxHealthBarValue) 
+            
+            if (_maxHealthBarValue <= healthBar.minValue || maxInput <= _maxHealthBarValue) 
             { 
-                Debug.Log("The maximum life points must be between " + healthBar.minValue + " and " + _maxEingabe + ".");
-                HelpDisplay.text = "The maximum life points must be between " + healthBar.minValue + " and " + _maxEingabe + ".";
-                CancelInvoke("ClearHelpDisplay");
-                Invoke("ClearHelpDisplay", 2);
+                Debug.Log($"The maximum life points must be between {healthBar.minValue} and {maxInput}.");
+                helpDisplay.text = $"The maximum life points must be between {healthBar.minValue} and {maxInput}.";
+                CancelInvoke(nameof(ClearHelpDisplay));
+                Invoke(nameof(ClearHelpDisplay), 2);
                 return; 
             }
+            
             float temp = (healthBar.value/healthBar.maxValue)*_maxHealthBarValue;
             healthBar.maxValue = _maxHealthBarValue;
             healthBar.value = temp;
@@ -93,7 +95,7 @@ namespace _06_Scripts
 
         public void UpdateHealthValueDisplay()
         {
-            maxHealthBarValueDisplay.text = healthBar.value.ToString();
+            maxHealthBarValueDisplay.text = $"{healthBar.value}"; 
         }
 
 
@@ -105,7 +107,7 @@ namespace _06_Scripts
 
         public void TankTest()
         {
-            if (healthBar.value == healthBar.minValue)
+            if (healthBar.value <= healthBar.minValue)
             {
                 CharAlreadyDead();
                 return;
@@ -115,10 +117,7 @@ namespace _06_Scripts
             
             if (_tankAttackAmount <= healthBar.minValue || _tankAttackAmount >= healthBar.maxValue)
             {
-                Debug.Log("The damage must be between " + healthBar.minValue + " and " + healthBar.maxValue + ".");
-                HelpDisplay.text = "The damage must be between " + healthBar.minValue + " and " + healthBar.maxValue + ".";
-                CancelInvoke("ClearHelpDisplay");
-                Invoke("ClearHelpDisplay", 2);
+                DamageRangeExplanation();
                 return;
             }
             
@@ -130,7 +129,7 @@ namespace _06_Scripts
     
         public void CrossbowTest()
         {
-            if (healthBar.value == healthBar.minValue)
+            if (healthBar.value <= healthBar.minValue)
             {
                 CharAlreadyDead();
                 return;
@@ -140,10 +139,7 @@ namespace _06_Scripts
             
             if (_crossbowAttackAmount <= healthBar.minValue || _crossbowAttackAmount >= healthBar.maxValue)
             {
-                Debug.Log("The damage must be between " + healthBar.minValue + " and " + healthBar.maxValue + ".");
-                HelpDisplay.text = "The damage must be between " + healthBar.minValue + " and " + healthBar.maxValue + ".";
-                CancelInvoke("ClearHelpDisplay");
-                Invoke("ClearHelpDisplay", 2);
+                DamageRangeExplanation();
                 return;
             }
             
@@ -155,7 +151,7 @@ namespace _06_Scripts
 
         public void BombTest()
         {
-            if (healthBar.value == healthBar.minValue)
+            if (healthBar.value <= healthBar.minValue)
             {
                 CharAlreadyDead();
                 return;
@@ -165,10 +161,7 @@ namespace _06_Scripts
             
             if (_bombAttackAmount <= healthBar.minValue || _bombAttackAmount >= healthBar.maxValue)
             {
-                Debug.Log("The damage must be between " + healthBar.minValue + " and " + healthBar.maxValue + ".");
-                HelpDisplay.text = "The damage must be between " + healthBar.minValue + " and " + healthBar.maxValue + ".";
-                CancelInvoke("ClearHelpDisplay");
-                Invoke("ClearHelpDisplay", 2);
+                DamageRangeExplanation();
                 return;
             }
             
@@ -180,12 +173,12 @@ namespace _06_Scripts
 
         public void MedikitTest()
         {
-            if (healthBar.value == healthBar.maxValue)
+            if (healthBar.value >= healthBar.maxValue)
             {
                 Debug.Log("The character is fully healed. Deal damage first.");
-                HelpDisplay.text = "The character is fully healed. Deal damage first.";
-                CancelInvoke("ClearHelpDisplay");
-                Invoke("ClearHelpDisplay", 2);
+                helpDisplay.text = "The character is fully healed. Deal damage first.";
+                CancelInvoke(nameof(ClearHelpDisplay));
+                Invoke(nameof(ClearHelpDisplay), 2);
                 return;
             }
             
@@ -193,10 +186,10 @@ namespace _06_Scripts
             
             if (_medikitAttackAmount <= healthBar.minValue || _medikitAttackAmount >= healthBar.maxValue)
             {
-                Debug.Log("The healing must be between " + healthBar.minValue + " and " + healthBar.maxValue + ".");
-                HelpDisplay.text = "The healing must be between " + healthBar.minValue + " and " + healthBar.maxValue + ".";
-                CancelInvoke("ClearHelpDisplay");
-                Invoke("ClearHelpDisplay", 2);
+                Debug.Log($"The healing must be between {healthBar.minValue} and {healthBar.maxValue}.");
+                helpDisplay.text = $"The healing must be between {healthBar.minValue} and {healthBar.maxValue}.";
+                CancelInvoke(nameof(ClearHelpDisplay));
+                Invoke(nameof(ClearHelpDisplay), 2);
                 return;
             }
             
@@ -209,15 +202,24 @@ namespace _06_Scripts
         private void CharAlreadyDead()
         {
             Debug.Log("The character is already dead. Reset the life points first.");
-            HelpDisplay.text = "The character is already dead. Reset the life points first.";
-            CancelInvoke("ClearHelpDisplay");
-            Invoke("ClearHelpDisplay", 2);
+            helpDisplay.text = "The character is already dead. Reset the life points first.";
+            CancelInvoke(nameof(ClearHelpDisplay));
+            Invoke(nameof(ClearHelpDisplay), 2);
+        }
+
+
+        private void DamageRangeExplanation()
+        {
+            Debug.Log($"The damage must be between {healthBar.minValue} and {healthBar.maxValue}.");
+            helpDisplay.text = $"The damage must be between {healthBar.minValue} and {healthBar.maxValue}.";
+            CancelInvoke(nameof(ClearHelpDisplay));
+            Invoke(nameof(ClearHelpDisplay), 2);  
         }
 
         
-        void ClearHelpDisplay()
+        private void ClearHelpDisplay()
         {
-            HelpDisplay.text = "";
+            helpDisplay.text = "";
             Debug.Log("HelpDisplay cleared.");
         }
 
