@@ -36,18 +36,18 @@
         // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
       });
     </script>
-<script>
-function resizeUnity() {
-    const canvas = document.querySelector("#unity-canvas");
-    if (!canvas) return;
+    <script>
+      function resizeUnity() {
+        const canvas = document.querySelector("#unity-canvas");
+        if (!canvas) return;
 
-    canvas.style.width = window.innerWidth + "px";
-    canvas.style.height = window.innerHeight + "px";
-}
+        canvas.style.width = window.innerWidth + "px";
+        canvas.style.height = window.innerHeight + "px";
+      }
 
-window.addEventListener("resize", resizeUnity);
-window.addEventListener("orientationchange", resizeUnity);
-window.addEventListener("load", resizeUnity);
-</script>
+      window.addEventListener("resize", resizeUnity);
+      window.addEventListener("orientationchange", resizeUnity);
+      window.addEventListener("load", resizeUnity);
+    </script>
   </body>
 </html>
