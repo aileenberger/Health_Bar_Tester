@@ -5,6 +5,20 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | Health Bar Tester</title>
   </head>
+<script>
+function resizeUnity() {
+    const canvas = document.querySelector("#unity-canvas");
+    const height = window.innerHeight;
+    const width = window.innerWidth;
+
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+}
+
+window.addEventListener("resize", resizeUnity);
+window.addEventListener("orientationchange", resizeUnity);
+resizeUnity();
+</script>
   <body style="text-align: center; padding: 0; border: 0; margin: 0;">
     <canvas id="unity-canvas" width=1920 height=1080 style="width: 1920px; height: 1080px; background: #231F20"></canvas>
     <script src="Build/docs.loader.js"></script>
@@ -32,7 +46,7 @@
         companyName: "AileenBerger",
         productName: "Health Bar Tester",
         productVersion: "0.1",
-        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        // matchWebGLToCanvasSize: true, // Uncomment this to separately control WebGL canvas render size and DOM element size.
         // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
       });
     </script>
